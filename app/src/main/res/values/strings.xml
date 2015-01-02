@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Airports Gissoft</string>
+    <string name="title_name">Airports</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="airport">Airport</string>
+    <string name="country">Country</string>
+
+    <string name="routes">Routes</string>
+
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--color blue for theme-->
+    <color name="blue_dark">#082488</color>
+    <color name="blue_medium">#024ED9</color>
+    <color name="blue_low">#0295F7</color>
+
+    <!--color font-->
+    <color name="text_primary">#D9D9D8</color>
+    <color name="text_secondary">#0B0B0B</color>
+
+</resources>
