@@ -31,13 +31,17 @@ public class AirportListAdapter extends BaseAdapter implements StickyListHeaders
     public AirportListAdapter(Context mContext) {
         this.mContext = mContext;
         this.mInflater = LayoutInflater.from(this.mContext);
-        this.airportsList = new DBmanager().selectAirports();
-        this.mSectionIndices = new ArrayList<Integer>();
-        this.mCountries = new ArrayList<String>();
-        this.mHeaderId = new ArrayList<>();
-        setDataList();
+        if (this.airportsList == null) {
+            this.airportsList = new DBmanager().selectAirports();
+            this.mSectionIndices = new ArrayList<Integer>();
+            this.mCountries = new ArrayList<String>();
+            this.mHeaderId = new ArrayList<>();
+            setDataList();
+        }
 
     }
+
+
 
     public int getmSectionIndices(int position) {
         return mSectionIndices.get(position);
@@ -98,7 +102,7 @@ public class AirportListAdapter extends BaseAdapter implements StickyListHeaders
 
     @Override
     public Object getItem(int position) {
-        return airportsList.get(position).getName();
+        return airportsList.get(position);
     }
 
     @Override
@@ -160,4 +164,6 @@ public class AirportListAdapter extends BaseAdapter implements StickyListHeaders
     class ViewHolder {
         TextView textView;
     }
+
+
 }

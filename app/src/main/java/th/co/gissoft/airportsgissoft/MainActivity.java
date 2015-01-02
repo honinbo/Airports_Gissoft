@@ -1,12 +1,16 @@
 package th.co.gissoft.airportsgissoft;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
+import android.widget.AdapterView;
 
 import se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+import th.co.gissoft.airportsgissoft.data.Airport;
 import th.co.gissoft.airportsgissoft.data.AppConfig;
+import th.co.gissoft.airportsgissoft.data.DbField;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -22,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
 
         listView = (ExpandableStickyListHeadersListView) findViewById(R.id.list_airports);
 
-        AirportListAdapter airportAdapter = new AirportListAdapter(this);
+        final AirportListAdapter airportAdapter = new AirportListAdapter(this);
         listView.setAdapter(airportAdapter);
 
         listFragment = findViewById(R.id.fragment);
@@ -32,6 +36,25 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onHeaderClick(StickyListHeadersListView l, View header, int itemPosition, long headerId, boolean currentlySticky) {
                 listFragment.setVisibility(View.VISIBLE);
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(), AirportDetailActivity.class);
+                // put data to detailActivity
+                Airport airport = (Airport) airportAdapter.getItem(position);
+                intent.putExtra(DbField.AIRPORTS_AIRPORTID, airport.getAirportid());
+                intent.putExtra(DbField.AIRPORTS_NAME, airport.getName());
+                intent.putExtra(DbField.AIRPORTS_CITY, airport.getCity());
+                intent.putExtra(DbField.AIRPORTS_COUNTRY, airport.getCountry());
+                intent.putExtra(DbField.AIRPORTS_IATA, airport.getIata());
+                intent.putExtra(DbField.AIRPORTS_LAT, airport.getLat());
+                intent.putExtra(DbField.AIRPORTS_LON, airport.getLon());
+
+                startActivity(intent);
             }
         });
     }
@@ -47,4 +70,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
     }
+
+
+
 }

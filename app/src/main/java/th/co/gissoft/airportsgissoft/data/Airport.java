@@ -27,6 +27,8 @@ public class Airport {
         this.tz = tz;
     }
 
+    public Airport() {}
+
     public int getAirportid() {
         return airportid;
     }

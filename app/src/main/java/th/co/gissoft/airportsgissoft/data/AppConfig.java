@@ -23,7 +23,7 @@ public class AppConfig {
     public static String PATHDATABASE = "/database";
     private static String mDataBasePath = null;
 
-    public String url_basemap = "http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
+    public final static String url_basemap = "http://services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer";
 
     public static String getmDataBasePath() {
         return mDataBasePath;
