@@ -15,6 +15,13 @@ android {
         versionCode 1
         versionName "1.0"
     }
+
+    packagingOptions{
+        exclude 'META-INF/LGPL2.1'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -28,4 +35,5 @@ dependencies {
     compile project(':StickyHeaderListLibrary')
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.nineoldandroids:library:2.4.0+'
+    compile 'com.esri.arcgis.android:arcgis-android:10.2.5'
 }
