@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 
 import se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
+import th.co.gissoft.airportsgissoft.activity.AirportDetailActivity;
+import th.co.gissoft.airportsgissoft.adapter.AirportListAdapter;
 import th.co.gissoft.airportsgissoft.data.Airport;
 import th.co.gissoft.airportsgissoft.data.AppConfig;
 import th.co.gissoft.airportsgissoft.data.DbField;

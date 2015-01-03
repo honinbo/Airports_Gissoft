@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="th.co.gissoft.airportsgissoft.AirportDetailActivity">
+    tools:context="th.co.gissoft.airportsgissoft.activity.AirportDetailActivity">
 
     <com.esri.android.map.MapView
         android:id="@+id/mapView"
@@ -116,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/airline"
                 android:id="@+id/txt_airlines"
+                android:textColor="@color/blue_low"
                 android:layout_marginLeft="@dimen/abc_text_size_display_1_material"/>
         </TableRow>
 

@@ -1,10 +1,12 @@
-package th.co.gissoft.airportsgissoft;
+package th.co.gissoft.airportsgissoft.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import th.co.gissoft.airportsgissoft.R;
 
 /**
  * Created by getgo_000 on 1/1/2558.

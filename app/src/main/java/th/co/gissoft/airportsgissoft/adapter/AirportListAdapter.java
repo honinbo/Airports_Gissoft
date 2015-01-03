@@ -1,4 +1,4 @@
-package th.co.gissoft.airportsgissoft;
+package th.co.gissoft.airportsgissoft.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 import th.co.gissoft.airportsgissoft.DBmanager.DBmanager;
+import th.co.gissoft.airportsgissoft.R;
 import th.co.gissoft.airportsgissoft.data.Airport;
 
 /**

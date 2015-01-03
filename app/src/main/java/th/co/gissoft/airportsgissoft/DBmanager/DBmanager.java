@@ -20,7 +20,7 @@ public class DBmanager {
 
     public ArrayList<Airport> selectAirports(){
         ArrayList<Airport> airports_List = new ArrayList<Airport>();
-        Cursor cursor = dbCommand.Select(DbField.TBL_AIRPORTS, null, DbField.AIRPORTS_COUNTRY+" ASC");
+        Cursor cursor = dbCommand.Select(DbField.TBL_AIRPORTS, null, DbField.AIRPORTS_COUNTRY +", "+ DbField.AIRPORTS_NAME + " ASC");
         while (cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndex(DbField.AIRPORTS_AIRPORTID));
             String name = cursor.getString(cursor.getColumnIndex(DbField.AIRPORTS_NAME));
@@ -39,5 +39,13 @@ public class DBmanager {
         dbCommand.close();
 
         return airports_List;
+    }
+
+    public Cursor selectAirlines(int airportid){
+
+        String sqlCmd = " SELECT * FROM ROUTES R JOIN AIRLINES A on R.airlineid = A.airlineid WHERE R.destairportid = '"+ airportid +"' GROUP BY R.airlineid ";
+        Cursor cursor = dbCommand.RawSelect(sqlCmd);
+
+        return cursor;
     }
 }
