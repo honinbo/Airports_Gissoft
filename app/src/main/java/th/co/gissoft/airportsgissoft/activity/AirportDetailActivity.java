@@ -1,9 +1,11 @@
-package th.co.gissoft.airportsgissoft;
+package th.co.gissoft.airportsgissoft.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.DragEvent;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +19,12 @@ import com.esri.android.map.event.OnStatusChangedListener;
 import com.esri.core.geometry.Point;
 import com.esri.core.map.Graphic;
 import com.esri.core.symbol.PictureMarkerSymbol;
+import com.esri.core.tasks.geocode.Locator;
 
+import Gissoft.UnitAdapter.WebMercator;
+import Gissoft.UnitConverter.CoordinateConverter;
+import th.co.gissoft.airportsgissoft.DBmanager.DBmanager;
+import th.co.gissoft.airportsgissoft.R;
 import th.co.gissoft.airportsgissoft.data.Airport;
 import th.co.gissoft.airportsgissoft.data.AppConfig;
 import th.co.gissoft.airportsgissoft.data.DbField;
@@ -77,30 +84,26 @@ public class AirportDetailActivity extends ActionBarActivity {
             @Override
             public void onStatusChanged(Object o, STATUS status) {
 
-                mMapview.centerAt(mAirport.getLat(), mAirport.getLon(), true);
+                //Set point of location's airport
+                WebMercator webMercator = CoordinateConverter.LLT2WebMercator(mAirport.getLat(), mAirport.getLon());
+                Point point = new Point(webMercator.X, webMercator.Y);
 
+                //Zoom and center in map with location of airport
                 double[] info = mBaseMaplayer.getTileInfo().getResolutions();
                 double resolution = info[16];
-                mMapview.zoomToResolution(null, resolution);
+                mMapview.zoomToResolution(point, resolution);
 
+                // Set Picture for pin
+                PictureMarkerSymbol picture = new PictureMarkerSymbol(getResources().getDrawable(R.drawable.airport_n));
+                mGraphicsLayer.removeAll();
 
-                    PictureMarkerSymbol picture = new PictureMarkerSymbol(getResources().getDrawable(R.drawable.airport_n));
-                    mGraphicsLayer.removeAll();
-
-                    Point point = new Point();
-                    point = mMapview.getCenter();
-                    mGraphic = new Graphic(point, picture);
-                    mGraphicsLayer.addGraphic(mGraphic);
+                // Pin graphic to graphic Layer
+                mGraphic = new Graphic(point, picture);
+                mGraphicsLayer.addGraphic(mGraphic);
 
             }
         });
-
         setTextViewData();
-
-
-
-
-
     }
 
 
@@ -120,6 +123,8 @@ public class AirportDetailActivity extends ActionBarActivity {
         mTxtCity.setText(mAirport.getCity());
         mTxtCountry.setText(mAirport.getCountry());
         mTxtIATA.setText(mAirport.getIata());
+        int airlinetoAirport = new DBmanager().selectAirlines(mAirport.getAirportid()).getCount();
+        mTxtAirlines.setText("("+ airlinetoAirport +")");
 
     }
 
