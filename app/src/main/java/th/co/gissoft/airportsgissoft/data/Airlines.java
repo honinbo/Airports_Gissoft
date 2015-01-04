@@ -18,6 +18,10 @@ public class Airlines {
         this.country = country;
     }
 
+    public Airlines() {
+
+    }
+
     public int getAirlineid() {
         return airlineid;
     }

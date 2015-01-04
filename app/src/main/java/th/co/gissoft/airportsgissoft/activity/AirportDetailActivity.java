@@ -125,6 +125,23 @@ public class AirportDetailActivity extends ActionBarActivity {
         mTxtIATA.setText(mAirport.getIata());
         int airlinetoAirport = new DBmanager().selectAirlines(mAirport.getAirportid()).getCount();
         mTxtAirlines.setText("("+ airlinetoAirport +")");
+        if (airlinetoAirport != 0) {
+
+            mTxtAirlines.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent();
+                    intent.setClass(getApplicationContext(), AirlineDetailActivity.class);
+                    intent.putExtra(DbField.AIRPORTS_AIRPORTID, mAirport.getAirportid());
+                    startActivity(intent);
+                }
+            });
+        }
+        else {
+            mTxtAirlines.setTextColor(getResources().getColor(R.color.text_secondary));
+        }
+
+
 
     }
 

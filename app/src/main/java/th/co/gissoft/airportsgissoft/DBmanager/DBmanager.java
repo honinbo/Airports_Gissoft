@@ -43,7 +43,7 @@ public class DBmanager {
 
     public Cursor selectAirlines(int airportid){
 
-        String sqlCmd = " SELECT * FROM ROUTES R JOIN AIRLINES A on R.airlineid = A.airlineid WHERE R.destairportid = '"+ airportid +"' GROUP BY R.airlineid ";
+        String sqlCmd = " SELECT A.airlineid, A.name, A.iata FROM ROUTES R JOIN AIRLINES A on R.airlineid = A.airlineid WHERE R.destairportid = '"+ airportid +"' GROUP BY R.airlineid ";
         Cursor cursor = dbCommand.RawSelect(sqlCmd);
 
         return cursor;
