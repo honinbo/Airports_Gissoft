@@ -1,6 +1,5 @@
 package th.co.gissoft.airportsgissoft.adapter;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.Cursor;
@@ -13,14 +12,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
 import th.co.gissoft.airportsgissoft.DBmanager.DBmanager;
 import th.co.gissoft.airportsgissoft.R;
-import th.co.gissoft.airportsgissoft.activity.AirlineDetailActivity;
+import th.co.gissoft.airportsgissoft.activity.AirlineListActivity;
 import th.co.gissoft.airportsgissoft.data.Airlines;
 import th.co.gissoft.airportsgissoft.data.DbField;
 
@@ -32,12 +30,10 @@ public class AirlinesAdapter extends BaseAdapter {
     private final Context mContext;
     private LayoutInflater mInflater;
     private Cursor mCursor_airlines;
-    private AirlineDetailActivity act;
     private ArrayList<Airlines> mAirlineList = new ArrayList<>();
 
-    public AirlinesAdapter(Context mContext, AirlineDetailActivity act, int airportId) {
+    public AirlinesAdapter(Context mContext, int airportId) {
         this.mContext = mContext;
-        this.act = act;
         this.mInflater = LayoutInflater.from(this.mContext);
         mCursor_airlines = new DBmanager().selectAirlines(airportId);
 

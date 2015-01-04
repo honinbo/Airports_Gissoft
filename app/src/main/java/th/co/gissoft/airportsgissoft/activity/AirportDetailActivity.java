@@ -1,12 +1,9 @@
 package th.co.gissoft.airportsgissoft.activity;
 
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
-import android.view.DragEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -14,12 +11,10 @@ import android.widget.TextView;
 import com.esri.android.map.GraphicsLayer;
 import com.esri.android.map.MapView;
 import com.esri.android.map.ags.ArcGISTiledMapServiceLayer;
-import com.esri.android.map.event.OnSingleTapListener;
 import com.esri.android.map.event.OnStatusChangedListener;
 import com.esri.core.geometry.Point;
 import com.esri.core.map.Graphic;
 import com.esri.core.symbol.PictureMarkerSymbol;
-import com.esri.core.tasks.geocode.Locator;
 
 import Gissoft.UnitAdapter.WebMercator;
 import Gissoft.UnitConverter.CoordinateConverter;
@@ -131,7 +126,7 @@ public class AirportDetailActivity extends ActionBarActivity {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent();
-                    intent.setClass(getApplicationContext(), AirlineDetailActivity.class);
+                    intent.setClass(getApplicationContext(), AirlineListActivity.class);
                     intent.putExtra(DbField.AIRPORTS_AIRPORTID, mAirport.getAirportid());
                     startActivity(intent);
                 }
