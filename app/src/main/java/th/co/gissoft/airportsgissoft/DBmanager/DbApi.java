@@ -5,6 +5,8 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.Locale;
+
 import th.co.gissoft.airportsgissoft.data.AppConfig;
 
 /**
@@ -19,13 +21,11 @@ public class DbApi {
 
         mDb = SQLiteDatabase.openDatabase(AppConfig.getmDataBasePath(), null,
                 SQLiteDatabase.NO_LOCALIZED_COLLATORS);
+
+
     }
     public boolean Insert(String table, ContentValues values)
     {
-//    	return Insert(table,values,"");
-//    }
-//    public boolean Insert(String table, ContentValues values,String whereClause)
-//    {
         boolean sucess = true;
         long row = 0;
         try
@@ -37,9 +37,8 @@ public class DbApi {
             sucess = false;
             e.printStackTrace();
         }
-        if(row < 1){
+        if(row < 1) {
             sucess = false;
-//        	sucess = Update(table, values, whereClause);
         }
         return sucess;
     }

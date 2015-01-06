@@ -3,14 +3,14 @@ package th.co.gissoft.airportsgissoft.data;
 /**
  * Created by getgo_000 on 30/12/2557.
  */
-public class Airlines {
+public class Airline {
 
     private int airlineid;
     private String name;
     private String iata;
     private String country;
 
-    public Airlines(int airlineid, String name, String iata, String country) {
+    public Airline(int airlineid, String name, String iata, String country) {
 
         this.airlineid = airlineid;
         this.name = name;
@@ -18,7 +18,7 @@ public class Airlines {
         this.country = country;
     }
 
-    public Airlines() {
+    public Airline() {
 
     }
 
@@ -53,4 +53,6 @@ public class Airlines {
     public void setCountry(String country) {
         this.country = country;
     }
+
+
 }

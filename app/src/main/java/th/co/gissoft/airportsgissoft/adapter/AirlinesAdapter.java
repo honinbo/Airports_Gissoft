@@ -1,25 +1,22 @@
 package th.co.gissoft.airportsgissoft.adapter;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import th.co.gissoft.airportsgissoft.DBmanager.DBmanager;
 import th.co.gissoft.airportsgissoft.R;
-import th.co.gissoft.airportsgissoft.activity.AirlineListActivity;
-import th.co.gissoft.airportsgissoft.data.Airlines;
+import th.co.gissoft.airportsgissoft.Utils;
+import th.co.gissoft.airportsgissoft.data.Airline;
 import th.co.gissoft.airportsgissoft.data.DbField;
 
 /**
@@ -30,22 +27,21 @@ public class AirlinesAdapter extends BaseAdapter {
     private final Context mContext;
     private LayoutInflater mInflater;
     private Cursor mCursor_airlines;
-    private ArrayList<Airlines> mAirlineList = new ArrayList<>();
+    private ArrayList<Airline> mAirlineList = new ArrayList<>();
 
     public AirlinesAdapter(Context mContext, int airportId) {
         this.mContext = mContext;
         this.mInflater = LayoutInflater.from(this.mContext);
         mCursor_airlines = new DBmanager().selectAirlines(airportId);
 
-    while (mCursor_airlines.moveToNext()) {
-        Airlines airline = new Airlines();
-        airline.setAirlineid(mCursor_airlines.getInt(mCursor_airlines.getColumnIndex(DbField.AIRLINES_AIRLINEID)));
-        airline.setName(mCursor_airlines.getString(mCursor_airlines.getColumnIndex(DbField.AIRLINES_NAME)));
-        airline.setIata(mCursor_airlines.getString(mCursor_airlines.getColumnIndex(DbField.AIRLINES_IATA)));
-        mAirlineList.add(airline);
+        while (mCursor_airlines.moveToNext()) {
+            Airline airline = new Airline();
+            airline.setAirlineid(mCursor_airlines.getInt(mCursor_airlines.getColumnIndex(DbField.AIRLINES_AIRLINEID)));
+            airline.setName(mCursor_airlines.getString(mCursor_airlines.getColumnIndex(DbField.AIRLINES_NAME)));
+            airline.setIata(mCursor_airlines.getString(mCursor_airlines.getColumnIndex(DbField.AIRLINES_IATA)));
+            mAirlineList.add(airline);
+        }
     }
-    }
-
 
 
     @Override
@@ -80,28 +76,17 @@ public class AirlinesAdapter extends BaseAdapter {
 
         holder.txtAirline.setText(mAirlineList.get(position).getName());
 
-        Bitmap airlineLogo = setPicture(mAirlineList.get(position).getIata());
+        Utils util = new Utils(mContext);
 
+        Bitmap airlineLogo = util.getPictureFromAssets(mAirlineList.get(position).getIata());
         holder.imgAirline.setImageBitmap(airlineLogo);
+
+        if (airlineLogo == null) {
+            holder.imgAirline.setLayoutParams(new LinearLayout.LayoutParams(180, 50));
+        }
 
         return convertView;
     }
-
-    private Bitmap setPicture(String filename) {
-        String file = filename +".png";
-        Bitmap airlineLogo;
-        AssetManager assetManager = mContext.getAssets();
-        InputStream istr = null;
-        try {
-            istr = assetManager.open(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        airlineLogo = BitmapFactory.decodeStream(istr);
-        return airlineLogo;
-    }
-
-
 
     private class ViewHolder {
         TextView txtAirline;

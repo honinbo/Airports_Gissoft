@@ -17,5 +17,6 @@
     <string name="airline">Airlines</string>
 
     <string name="title_activity_airline_detail">AirlineDetailActivity</string>
+    <string name="departures">Departures</string>
 
 </resources>
