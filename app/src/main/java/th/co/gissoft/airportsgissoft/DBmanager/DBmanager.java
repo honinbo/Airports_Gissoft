@@ -81,7 +81,7 @@ public class DBmanager {
 
     public ArrayList<Routes> selectRouteResult(String sourceCountry, String destCountry){
         ArrayList<Routes> resultList = new ArrayList<>();
-        String sqlCmd = " SELECT R.airlineid, A.[name], A.[iata], SP.airportid as sourceid, SP.name as sourcename, SP.country as sourcecountry," +
+        String sqlCmd = " SELECT R.airlineid, A.name, A.iata, SP.airportid as sourceid, SP.name as sourcename, SP.country as sourcecountry," +
                 " SP.lat as sourcelat, SP.lon as sourcelon, DP.airportid as destid, DP.name as destname, DP.country as destcountry, DP.lat as destlat, DP.lon as destlon " +
                 "FROM airlines A JOIN routes R ON A.aiRlineid = R.airlineid " +
                 "JOIN airports SP on R.sourceairportid = SP.airportid " +

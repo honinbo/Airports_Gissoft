@@ -21,6 +21,7 @@ import com.esri.core.symbol.SimpleLineSymbol;
 import Gissoft.UnitAdapter.WebMercator;
 import Gissoft.UnitConverter.CoordinateConverter;
 import th.co.gissoft.airportsgissoft.R;
+import th.co.gissoft.airportsgissoft.Utils;
 import th.co.gissoft.airportsgissoft.data.AppConfig;
 import th.co.gissoft.airportsgissoft.data.DbField;
 
@@ -65,6 +66,8 @@ public class MapActivity extends ActionBarActivity {
                 //Set point of location's airport
                 WebMercator sourceMercator = CoordinateConverter.LLT2WebMercator(sourceLat, sourceLon);
                 WebMercator destMercator = CoordinateConverter.LLT2WebMercator(destLat, destLon);
+                
+                int airport_pic = setPicture(sourceLat, sourceLon, destLat, destLon);
 
                 Point sourcePoint = new Point(sourceMercator.X, sourceMercator.Y);
                 Point destPoint = new Point(destMercator.X, destMercator.Y);
@@ -81,7 +84,7 @@ public class MapActivity extends ActionBarActivity {
                 mGraphicsLayer.addGraphic(lineGraphic);
 
                 // Set Picture for pin
-                PictureMarkerSymbol pictureSource = new PictureMarkerSymbol(getResources().getDrawable(R.drawable.airport_n));
+                PictureMarkerSymbol pictureSource = new PictureMarkerSymbol(getResources().getDrawable(airport_pic));
                 PictureMarkerSymbol pictureDest = new PictureMarkerSymbol(getResources().getDrawable(R.drawable.target));
 
 
@@ -101,6 +104,33 @@ public class MapActivity extends ActionBarActivity {
 
             }
         });
+    }
+
+    private int setPicture(double sourceLat, double sourceLon, double destLat, double destLon) {
+        double angle = new Utils(getApplicationContext()).getAngle(sourceLat, sourceLon, destLat, destLon);
+        int pic = 0;
+
+        if (angle > 67 && angle <= 112){
+            pic = R.drawable.airport_n;
+        } else if (angle > 23 && angle <= 67) {
+            pic = R.drawable.airport_ne;
+        } else if (angle > 337 && angle <= 23) {
+            pic = R.drawable.airport_e;
+        } else if (angle > 292 && angle <= 337) {
+            pic = R.drawable.airport_se;
+        } else if (angle > 247 && angle <= 292) {
+            pic = R.drawable.airport_s;
+        } else if (angle > 202 && angle <= 247) {
+            pic = R.drawable.airport_sw;
+        } else if (angle > 157 && angle <= 202) {
+            pic = R.drawable.airport_w;
+        } else if (angle > 112 && angle <= 157) {
+            pic = R.drawable.airport_nw;
+        } else {
+            pic = R.drawable.airport_n;
+        }
+
+        return pic;
     }
 
     @Override

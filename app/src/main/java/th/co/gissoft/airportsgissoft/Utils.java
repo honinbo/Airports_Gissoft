@@ -5,8 +5,13 @@ import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import com.esri.core.geometry.Point;
+
 import java.io.IOException;
 import java.io.InputStream;
+
+import Gissoft.UnitAdapter.WebMercator;
+import Gissoft.UnitConverter.CoordinateConverter;
 
 /**
  * Created by getgo_000 on 5/1/2558.
@@ -35,22 +40,37 @@ public class Utils {
 
     public double getDistance(double lat1, double lon1, double lat2, double lon2)
     {
-//        WebMercator sourceMercator = CoordinateConverter.LLT2WebMercator(lat1, lon1);
-//        WebMercator destMercator = CoordinateConverter.LLT2WebMercator(lat2, lon2);
-        double r = 6371;
 
-        double dlat = lat2 - lat1;
-        double dlon = lon2 - lon1;
-        double dPhi = Math.log( Math.tan(Math.PI/4 + lat2/2) / Math.tan(Math.PI/4 + lat1/2) );
+        double r = 3958;
+        lat1 = Math.toRadians(lat1);
+        lat2 = Math.toRadians(lat2);
+        double dlat = Math.toRadians(lat2-lat1);
+        double dlon = Math.toRadians(lon2- lon1);
+        double a = Math.sin(dlat/2) * Math.sin(dlat/2) +
+            Math.cos(lat1) * Math.cos(lat2) *
+                    Math.sin(dlon/2) * Math.sin(dlon/2);
 
-        double q = Math.abs(dlon) > Math.pow(10, -11) ? dlat/dPhi : Math.cos(lat1);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
 
-        if (Math.abs(dlon) > Math.PI)
-            dlon = dlon > 0 ? -(2*Math.PI - dlon) : (2*Math.PI+dlon);
+        double distance = (r * c);
 
-        double distance = Math.sqrt(dlat*dlat + q*q*dlon*dlon) * r;
+        return Math.floor(distance * 100) / 100;
+    }
 
+    public double getAngle(double lat1, double lon1, double lat2, double lon2) {
 
-        return distance;
+        WebMercator sourceMercator = CoordinateConverter.LLT2WebMercator(lat1, lon1);
+        Point sourcePoint = new Point(sourceMercator.X, sourceMercator.Y);
+        WebMercator destMercator = CoordinateConverter.LLT2WebMercator(lat2, lon2);
+        Point destPoint = new Point(destMercator.X, destMercator.Y);
+
+        double dlat = destPoint.getX() - sourcePoint.getX();
+        double dlon = destPoint.getY() - sourcePoint.getY();
+
+        double angle = Math.toDegrees(Math.atan2(dlon, dlat));
+        if (angle < 0)
+            angle += 360;
+
+        return angle;
     }
 }
