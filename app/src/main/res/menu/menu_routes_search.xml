@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="th.co.gissoft.airportsgissoft.activity.RoutesSearchActivity">
+
+    <item android:id="@+id/menu_search"
+        android:title="@string/search"
+        android:icon="@drawable/search_new"
+        android:orderInCategory="100" app:showAsAction="always" />
+</menu>

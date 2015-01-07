@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/list_route"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txt_source_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/source_airport"
+        android:textColor="@color/text_secondary"
+        android:paddingLeft="@dimen/abc_action_bar_icon_vertical_padding_material"
+        android:paddingTop="@dimen/abc_action_bar_icon_vertical_padding_material"
+        android:paddingBottom="@dimen/margin_text"/>
+
+    <TextView
+        android:id="@+id/txt_dest_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="@string/destination_airport"
+        android:textColor="@color/text_secondary"
+        android:paddingRight="@dimen/abc_action_bar_icon_vertical_padding_material"
+        android:paddingBottom="@dimen/abc_action_bar_icon_vertical_padding_material"
+        android:paddingTop="@dimen/margin_text" />
+</LinearLayout>

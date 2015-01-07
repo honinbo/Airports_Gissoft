@@ -7,6 +7,7 @@ public class Routes {
 
     private int airlineID;
     private String airlineName;
+    private String IATA;
 
     private int sourceid;
     private String sourcename;
@@ -19,6 +20,22 @@ public class Routes {
     private String destcountry;
     private double destlat;
     private double destlon;
+
+    public Routes(int airlineID, String airlineName, String IATA, int sourceid, String sourcename, String sourcecountry, double sourcelat, double sourcelon, int destid, String destname, String destcountry, double destlat, double destlon) {
+        this.airlineID = airlineID;
+        this.airlineName = airlineName;
+        this.IATA = IATA;
+        this.sourceid = sourceid;
+        this.sourcename = sourcename;
+        this.sourcecountry = sourcecountry;
+        this.sourcelat = sourcelat;
+        this.sourcelon = sourcelon;
+        this.destid = destid;
+        this.destname = destname;
+        this.destcountry = destcountry;
+        this.destlat = destlat;
+        this.destlon = destlon;
+    }
 
     public Routes(int airlineID, int sourceid, String sourcename, String sourcecountry, double sourcelat, double sourcelon, int destid, String destname, String destcountry, double destlat, double destlon) {
         this.airlineID = airlineID;
@@ -131,5 +148,13 @@ public class Routes {
 
     public void setDestlon(double destlon) {
         this.destlon = destlon;
+    }
+
+    public String getIATA() {
+        return IATA;
+    }
+
+    public void setIATA(String IATA) {
+        this.IATA = IATA;
     }
 }

@@ -14,13 +14,21 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:background="@drawable/btn_state"
             android:text="@string/title_name" />
+
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="@color/blue_dark"/>
 
         <Button
             android:id="@+id/btn_routes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/btn_airports"
+            android:background="@drawable/btn_state"
             android:layout_weight="0.5"
             android:text="@string/routes" />
     </LinearLayout>

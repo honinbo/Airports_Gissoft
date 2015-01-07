@@ -58,8 +58,6 @@ public class AirportDetailActivity extends ActionBarActivity {
 
         mMapview.enableWrapAround(true);
 
-
-
         //create Airport object
         mAirport = new Airport();
 
@@ -135,8 +133,6 @@ public class AirportDetailActivity extends ActionBarActivity {
         else {
             mTxtAirlines.setTextColor(getResources().getColor(R.color.text_secondary));
         }
-
-
 
     }
 

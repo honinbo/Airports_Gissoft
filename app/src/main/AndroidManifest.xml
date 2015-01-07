@@ -37,6 +37,14 @@
             android:name=".activity.AirlineDetailActivity"
             android:label="@string/title_activity_airline_detail" >
         </activity>
+        <activity
+            android:name=".activity.RoutesSearchActivity"
+            android:label="@string/title_activity_routes_search" >
+        </activity>
+        <activity
+            android:name=".activity.RouteResultsActivity"
+            android:label="@string/title_activity_route_results" >
+        </activity>
     </application>
 
 </manifest>

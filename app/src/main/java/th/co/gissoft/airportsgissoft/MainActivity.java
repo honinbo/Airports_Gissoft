@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView;
 import se.emilsjolander.stickylistheaders.StickyListHeadersListView;
 import th.co.gissoft.airportsgissoft.activity.AirportDetailActivity;
+import th.co.gissoft.airportsgissoft.activity.RoutesSearchActivity;
 import th.co.gissoft.airportsgissoft.adapter.AirportListAdapter;
 import th.co.gissoft.airportsgissoft.data.Airport;
 import th.co.gissoft.airportsgissoft.data.AppConfig;
@@ -57,6 +58,18 @@ public class MainActivity extends ActionBarActivity {
                 intent.putExtra(DbField.AIRPORTS_LON, airport.getLon());
 
                 startActivity(intent);
+            }
+        });
+
+        findViewById(R.id.btn_routes).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent in = new Intent();
+                in.setClass(getApplicationContext(), RoutesSearchActivity.class);
+                startActivity(in);
+                finish();
+
+                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
             }
         });
     }

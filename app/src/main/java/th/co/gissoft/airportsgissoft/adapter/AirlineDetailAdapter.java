@@ -2,12 +2,10 @@ package th.co.gissoft.airportsgissoft.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -57,9 +55,9 @@ public class AirlineDetailAdapter extends BaseAdapter {
 
             int destid = mCursor.getInt(mCursor.getColumnIndex(DbField.ROUTES_DEST_AIRPORT_ID));
             String destname = mCursor.getString(mCursor.getColumnIndex(DbField.ROUTES_DEST_AIRPORT_NAME));
-            String destcountry = mCursor.getString(mCursor.getColumnIndex(DbField.ROUTES_DEST_AIRPORT_COUNTRY));;
-            double destlat = mCursor.getDouble(mCursor.getColumnIndex(DbField.ROUTES_DEST_AIRPORT_LAT));;
-            double destlon = mCursor.getDouble(mCursor.getColumnIndex(DbField.ROUTES_DEST_AIRPORT_LON));;
+            String destcountry = mCursor.getString(mCursor.getColumnIndex(DbField.ROUTES_DEST_AIRPORT_COUNTRY));
+            double destlat = mCursor.getDouble(mCursor.getColumnIndex(DbField.ROUTES_DEST_AIRPORT_LAT));
+            double destlon = mCursor.getDouble(mCursor.getColumnIndex(DbField.ROUTES_DEST_AIRPORT_LON));
 
             mRoutes.add(new Routes(airlineID, sourceid, sourcename, sourcecountry, sourcelat, sourcelon, destid, destname, destcountry, destlat, destlon));
         }
@@ -99,7 +97,16 @@ public class AirlineDetailAdapter extends BaseAdapter {
 
         holder.txt_airportName.setText(mRoutes.get(position).getSourcename());
         holder.txt_country.setText(mRoutes.get(position).getSourcecountry());
-        holder.txt_distance.setText("Temp");
+
+        double source_lat = mRoutes.get(position).getSourcelat();
+        double source_lon = mRoutes.get(position).getSourcelon();
+        double dest_lat = mRoutes.get(position).getDestlat();
+        double dest_lon = mRoutes.get(position).getDestlon();
+
+
+        double distance = new Utils(mContext).getBearing(source_lat, source_lon, dest_lat, dest_lon);
+
+        holder.txt_distance.setText(""+distance);
 
         return convertView;
     }

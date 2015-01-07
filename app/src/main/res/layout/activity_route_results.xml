@@ -1,0 +1,22 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="th.co.gissoft.airportsgissoft.activity.RouteResultsActivity">
+
+
+
+
+    <se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView
+        android:id="@+id/list_route_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:drawSelectorOnTop="true"
+        android:fastScrollEnabled="true"
+        android:overScrollMode="never"
+        android:padding="16dp"
+        android:scrollbarStyle="outsideOverlay"/>
+
+
+
+</LinearLayout>
