@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import Gissoft.UnitAdapter.WebMercator;
 import th.co.gissoft.airportsgissoft.DBmanager.DBmanager;
 import th.co.gissoft.airportsgissoft.R;
 import th.co.gissoft.airportsgissoft.Utils;
@@ -103,8 +104,11 @@ public class AirlineDetailAdapter extends BaseAdapter {
         double dest_lat = mRoutes.get(position).getDestlat();
         double dest_lon = mRoutes.get(position).getDestlon();
 
+        WebMercator mercator = new WebMercator();
 
-        double distance = new Utils(mContext).getBearing(source_lat, source_lon, dest_lat, dest_lon);
+
+
+        double distance = new Utils(mContext).getDistance(source_lat, source_lon, dest_lat, dest_lon);
 
         holder.txt_distance.setText(""+distance);
 

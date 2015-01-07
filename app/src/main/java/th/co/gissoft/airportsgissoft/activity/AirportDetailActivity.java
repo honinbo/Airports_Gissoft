@@ -25,6 +25,7 @@ import th.co.gissoft.airportsgissoft.data.AppConfig;
 import th.co.gissoft.airportsgissoft.data.DbField;
 
 
+
 public class AirportDetailActivity extends ActionBarActivity {
 
     private MapView mMapview;

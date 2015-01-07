@@ -45,6 +45,10 @@
             android:name=".activity.RouteResultsActivity"
             android:label="@string/title_activity_route_results" >
         </activity>
+        <activity
+            android:name=".activity.MapActivity"
+            android:label="@string/title_activity_map" >
+        </activity>
     </application>
 
 </manifest>

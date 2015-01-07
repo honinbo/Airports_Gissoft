@@ -6,12 +6,13 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 
 import se.emilsjolander.stickylistheaders.ExpandableStickyListHeadersListView;
-import th.co.gissoft.airportsgissoft.MainActivity;
 import th.co.gissoft.airportsgissoft.R;
 import th.co.gissoft.airportsgissoft.adapter.RouteListAdapter;
 import th.co.gissoft.airportsgissoft.data.DbField;
+import th.co.gissoft.airportsgissoft.data.Routes;
 
 public class RouteResultsActivity extends ActionBarActivity {
 
@@ -37,10 +38,25 @@ public class RouteResultsActivity extends ActionBarActivity {
 
         listView = (ExpandableStickyListHeadersListView) findViewById(R.id.list_route_result);
 
-        RouteListAdapter routeListAdapter = new RouteListAdapter(getApplicationContext(), sourceCountry, destCountry);
+        final RouteListAdapter routeListAdapter = new RouteListAdapter(getApplicationContext(), sourceCountry, destCountry);
         listView.setAdapter(routeListAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Routes route = (Routes) routeListAdapter.getItem(position);
 
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(), MapActivity.class);
+
+                intent.putExtra(DbField.AIRLINES_NAME, route.getAirlineName());
+                intent.putExtra(DbField.ROUTES_SOURCE_AIRPORT_LAT, route.getSourcelat());
+                intent.putExtra(DbField.ROUTES_SOURCE_AIRPORT_LON, route.getSourcelon());
+                intent.putExtra(DbField.ROUTES_DEST_AIRPORT_LAT, route.getDestlat());
+                intent.putExtra(DbField.ROUTES_DEST_AIRPORT_LON, route.getDestlon());
+                startActivity(intent);
+            }
+        });
 
 
     }

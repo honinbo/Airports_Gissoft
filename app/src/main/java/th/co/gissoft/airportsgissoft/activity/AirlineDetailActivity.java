@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -16,6 +18,7 @@ import th.co.gissoft.airportsgissoft.Utils;
 import th.co.gissoft.airportsgissoft.adapter.AirlineDetailAdapter;
 import th.co.gissoft.airportsgissoft.data.Airline;
 import th.co.gissoft.airportsgissoft.data.DbField;
+import th.co.gissoft.airportsgissoft.data.Routes;
 
 public class AirlineDetailActivity extends ActionBarActivity {
 
@@ -65,7 +68,22 @@ public class AirlineDetailActivity extends ActionBarActivity {
         mAirlineDetailAdapter = new AirlineDetailAdapter(this, mAirlineId, mAirportId, mAirlinename, mIATA);
         mListView.setAdapter(mAirlineDetailAdapter);
 
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Routes route = (Routes) mAirlineDetailAdapter.getItem(position);
 
+                Intent intent = new Intent();
+                intent.setClass(getApplicationContext(), MapActivity.class);
+
+                intent.putExtra(DbField.AIRLINES_NAME, route.getSourcename());
+                intent.putExtra(DbField.ROUTES_SOURCE_AIRPORT_LAT, route.getSourcelat());
+                intent.putExtra(DbField.ROUTES_SOURCE_AIRPORT_LON, route.getSourcelon());
+                intent.putExtra(DbField.ROUTES_DEST_AIRPORT_LAT, route.getDestlat());
+                intent.putExtra(DbField.ROUTES_DEST_AIRPORT_LON, route.getDestlon());
+                startActivity(intent);
+            }
+        });
 
     }
 
